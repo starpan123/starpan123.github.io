@@ -1,8 +1,494 @@
 <!DOCTYPE html>
-<html>
-<head> <meta charset="utf-8"> <title>我的第一个GitHub网站</title> </head>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>迟玮 · 深圳市眼科医院院长｜主任医师｜长江学者</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e9f0f5 0%, #dce5ec 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.5;
+            color: #1a2c3e;
+            padding: 2rem 1rem;
+        }
+
+        /* 主容器 — 优雅的白金底色 */
+        .resume-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 42px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* 渐变header 灵感来源于深医蓝 + 暖金润饰 */
+        .hero {
+            background: linear-gradient(135deg, #0b3954 0%, #0f4c68 50%, #146b86 100%);
+            padding: 2.5rem 3rem 2rem 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd966, #ffb347, #ff8c42);
+        }
+
+        .name-title h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.35rem;
+            line-height: 1.2;
+        }
+
+        .name-title h1 small {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #e0f0f7;
+        }
+
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(3px);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .badge i {
+            margin-right: 6px;
+            font-size: 0.8rem;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.6rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1.2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .contact-info span i {
+            width: 1.4rem;
+            color: #ffcd94;
+        }
+
+        .quote {
+            font-style: italic;
+            font-weight: 400;
+            opacity: 0.85;
+            font-size: 0.9rem;
+            border-left: 2px solid #ffcd94;
+            padding-left: 0.8rem;
+        }
+
+        /* 两栏布局 — 干净高级 */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.3fr;
+            gap: 0;
+        }
+
+        /* 左侧栏 — 柔灰信息区 */
+        .sidebar {
+            background: #f9fbfd;
+            padding: 2rem 2rem 2.5rem 2rem;
+            border-right: 1px solid #e2edf2;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2c7a9e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px solid #d4e2ea;
+            padding-bottom: 6px;
+        }
+
+        .section-title i {
+            font-size: 1rem;
+            color: #0f6b8c;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+        .info-list li {
+            margin-bottom: 0.8rem;
+            font-size: 0.92rem;
+            display: flex;
+            gap: 0.7rem;
+            align-items: baseline;
+        }
+        .info-list li strong {
+            font-weight: 700;
+            min-width: 80px;
+            color: #1f4e6e;
+        }
+        .text-muted {
+            color: #4d6a7e;
+        }
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.4rem;
+        }
+        .tag {
+            background: white;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #d0e2ed;
+            color: #1a5d7a;
+            transition: all 0.1s ease;
+        }
+
+        /* 右侧主内容 */
+        .main-content {
+            padding: 2rem 2.5rem 2.5rem 2.5rem;
+            background: white;
+        }
+
+        .bio-text {
+            margin-bottom: 1.8rem;
+            line-height: 1.6;
+            color: #2d3e4f;
+            font-size: 0.96rem;
+            background: #fefef7;
+            padding: 1.2rem 1.4rem;
+            border-radius: 24px;
+            border-left: 5px solid #ffb347;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .academic-list {
+            margin-bottom: 1.6rem;
+        }
+        .academic-item {
+            margin-bottom: 1.4rem;
+            border-left: 3px solid #dce9f0;
+            padding-left: 1rem;
+        }
+        .academic-item h4 {
+            font-weight: 700;
+            font-size: 1.02rem;
+            color: #175d78;
+            margin-bottom: 0.25rem;
+        }
+        .academic-detail {
+            font-size: 0.85rem;
+            color: #4b6f85;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .papers-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .paper-card {
+            background: #fafeff;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            transition: all 0.2s;
+            border: 1px solid #e7f0f4;
+        }
+        .paper-card:hover {
+            background: #ffffff;
+            border-color: #cce3ed;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        .paper-title {
+            font-weight: 700;
+            font-size: 0.96rem;
+            color: #103f56;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .paper-title i {
+            color: #ff8c42;
+            font-size: 0.9rem;
+        }
+        .paper-meta {
+            font-size: 0.75rem;
+            color: #6f8da0;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2px;
+        }
+        .paper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            background: #eef3f8;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #1b6e8f;
+            transition: 0.2s;
+        }
+        .paper-link i {
+            font-size: 0.7rem;
+        }
+        .paper-link:hover {
+            background: #e0ebf2;
+            color: #0a4b66;
+        }
+
+        hr.divider {
+            margin: 1rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #e2edf2, transparent);
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            text-align: center;
+            border-top: 1px solid #ebf2f6;
+            padding-top: 1.4rem;
+            color: #6c8e9f;
+        }
+
+        @media (max-width: 780px) {
+            .resume-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                padding: 1.5rem;
+            }
+            .name-title h1 {
+                font-size: 2rem;
+            }
+            .contact-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e2edf2;
+            }
+            .main-content {
+                padding: 1.8rem;
+            }
+        }
+        a {
+            text-decoration: none;
+        }
+        .stat-number {
+            font-weight: 800;
+            color: #1e6f8f;
+        }
+    </style>
+</head>
 <body>
-    <h1>你好，世界！</h1>
-    <p>我的GitHub网站上线啦！</p>
+
+<div class="resume-card">
+    <!-- Hero头部 -->
+    <div class="hero">
+        <div class="name-title">
+            <h1>迟玮 <small>Chi Wei, MD, PhD</small></h1>
+            <div class="badge-group">
+                <span class="badge"><i class="fas fa-trophy"></i> 教育部长江学者特聘教授</span>
+                <span class="badge"><i class="fas fa-chart-line"></i> 全球前2%顶尖科学家 (2024-2025)</span>
+                <span class="badge"><i class="fas fa-eye"></i> 主任医师｜博士生导师</span>
+                <span class="badge"><i class="fas fa-flask"></i> 国家重点研发计划首席科学家</span>
+            </div>
+        </div>
+        <div class="contact-bar">
+            <div class="contact-info">
+                <span><i class="fas fa-map-marker-alt"></i> 深圳市眼科医院｜南方医科大学深圳眼科医学中心</span>
+                <span><i class="fas fa-envelope"></i> dr_chiwei@163.com</span>
+                <span><i class="fas fa-globe"></i> 眼底病｜葡萄膜炎｜眼免疫学</span>
+            </div>
+            <div class="quote">
+                “以精准诊疗重塑光明，让中国标准走向世界。”
+            </div>
+        </div>
+    </div>
+
+    <!-- 两栏内容 -->
+    <div class="resume-grid">
+        <!-- 左侧：基础信息+统计荣誉 -->
+        <div class="sidebar">
+            <div class="section">
+                <div class="section-title"><i class="fas fa-user-md"></i> 基本信息</div>
+                <ul class="info-list">
+                    <li><strong>职称</strong> 主任医师、教授（二级）</li>
+                    <li><strong>职位</strong> 深圳市眼科医院 院长<br>南方医科大学深圳眼科医学中心 院长</li>
+                    <li><strong>学历/博后</strong> 医学博士 (中山大学)<br>美国 Baylor 医学院 博士后</li>
+                    <li><strong>导师资质</strong> 博士研究生导师（学术/专业型）</li>
+                    <li><strong>学术兼职</strong> 中华医学会眼科分会免疫学组委员<br>中国医师协会眼科医师分会葡萄膜炎与免疫专委会委员</li>
+                </ul>
+            </div>
+            <div class="section">
+                <div class="section-title"><i class="fas fa-microscope"></i> 临床专长</div>
+                <div class="expertise-tags">
+                    <span class="tag">玻璃体视网膜手术</span>
+                    <span class="tag">复杂白内障手术</span>
+                    <span class="tag">葡萄膜炎精准诊疗</span>
+                    <span class="tag">眼底病分子诊断</span>
+                    <span class="tag">人工智能辅助眼病筛查</span>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title"><i class="fas fa-chart-simple"></i> 科研速览</div>
+                <div class="info-list" style="margin-bottom:0">
+                    <li><strong>SCI论文</strong> 82篇 (通讯/第一作者46篇)</li>
+                    <li><strong>IF>10分</strong> 15篇 (Nat Genet, Nat Commun, PNAS, BMJ等)</li>
+                    <li><strong>主持国自然</strong> 重点项目/区域联合重点等国家级基金6项</li>
+                    <li><strong>指南·共识</strong> 牵头/参与国内指南15项、国际标准1项</li>
+                    <li><strong>发明专利</strong> 授权4项 (靶向药物、AI诊疗模型)</li>
+                    <li><strong>省部级一等奖</strong> 广东省科技进步一等奖 (2024). 国家科技进步二等奖(主要参与人)</li>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title"><i class="fas fa-hand-holding-heart"></i> 社会公益</div>
+                <ul class="info-list">
+                    <li><strong>↳ 深喀光明行</strong> 为新疆喀什100名白内障患者免费手术并捐赠高端设备</li>
+                    <li><strong>↳ 九广合作</strong> 助力旺苍县人民医院建成省级眼科重点专科，填补新生儿眼病筛查空白</li>
+                    <li><strong>↳ 全国防盲</strong> 获评“亚太眼科杰出防盲服务奖”</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 右侧：深度介绍+论文及链接 -->
+        <div class="main-content">
+            <div class="bio-text">
+                <i class="fas fa-quote-left" style="color:#ffb347; margin-right:8px;"></i> 
+                迟玮教授深耕眼科临床与科研二十余年，原中山大学中山眼科中心副主任，2024年履新深圳市眼科医院院长。
+                她带领团队建成致盲眼病早期诊断体系，将致盲率从33%降至5.2%，打破欧美制定的眼病诊断标准垄断，
+                开创眼免疫固有免疫新机制，推动中国标准走向国际。目前医院依托“三名工程”及脑机接口视觉假体研究，持续引领眼科新质生产力。
+            </div>
+
+            <div class="section-title" style="margin-bottom: 1rem; border-bottom: 2px solid #ffe0b5;"><i class="fas fa-graduation-cap"></i> 教育·学术履历</div>
+            <div class="academic-list">
+                <div class="academic-item"><h4>🎓 博士后 | 美国 Baylor 医学院 (Texas Medical Center)</h4><div class="academic-detail">眼免疫学创新突破，首次揭示固有免疫致盲新机制，发现关键靶点并筛选药物。</div></div>
+                <div class="academic-item"><h4>🏥 医学博士 | 中山大学中山眼科中心</h4><div class="academic-detail">师从刘祖国教授、杨培增教授，期间发表中山眼科中心首篇IF>10分论文，获全国百篇优秀博士论文提名奖。</div></div>
+                <div class="academic-item"><h4>🔬 教授/副主任 | 中山眼科中心 (2010-2024)</h4><div class="academic-detail">任中心副主任、眼底病及眼免疫学科带头人，长江学者特聘教授，搭建高水平转化研究平台。</div></div>
+                <div class="academic-item"><h4>🌟 院长 | 深圳市眼科医院 (2024-至今)</h4><div class="academic-detail">推动“三院三中心”战略，建设脑机接口视觉假体实验室，AI诊疗大模型落地，2025年国自然立项8项创历史新高。</div></div>
+            </div>
+
+            <div class="section-title" style="margin: 0 0 1rem 0;"><i class="fas fa-file-alt"></i> 代表性论文 · 文章链接 (突出研究成果)</div>
+            <div class="papers-grid">
+                <!-- 论文1: cell子刊 molecular cell 2025 -->
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fab fa-researchgate"></i> 揭示基因调控网络新方式，迟玮&牛龙见团队</div>
+                    <div class="paper-meta">Molecular Cell (Cell子刊) | 2025年11月 | 影响因子 16.6 (中科院一区)</div>
+                    <div class="paper-meta">深圳市眼科医院 第一作者&通讯作者单位</div>
+                    <a class="paper-link" href="https://www.cell.com/molecular-cell/home" target="_blank"><i class="fas fa-external-link-alt"></i> Molecular Cell 官网 (DOI 10.1016/j.molcel.2025.10.022)</a>
+                    <span style="margin-left: 8px; font-size:0.7rem; color:#8ea9bb;">(更多内容见团队报道)</span>
+                </div>
+                <!-- 论文2: PNAS 2020 VKH致病性单核细胞亚群 -->
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-dna"></i> PNAS │ Vogt-小柳原田综合征新的致病性单核细胞亚群及分子诊断标志物</div>
+                    <div class="paper-meta">Proc Natl Acad Sci USA (PNAS) | 通讯作者: Chi W. | 2020.9</div>
+                    <a class="paper-link" href="https://www.pnas.org/doi/10.1073/pnas.2012845117" target="_blank"><i class="fas fa-link"></i> 直达PNAS论文 · 精准医学突破</a>
+                </div>
+                <!-- 论文3: Advanced Science 2024眼部血管生成调控新机制 -->
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-eye"></i> Advanced Science │ AIP1调控眼部血管生成新机制</div>
+                    <div class="paper-meta">Adv Sci (Weinh). 2024 Nov;11(42):e2403821 | 迟玮团队</div>
+                    <a class="paper-link" href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202403821" target="_blank"><i class="fas fa-file-pdf"></i> Wiley在线 · 炎症血管生成研究</a>
+                </div>
+                <!-- 论文4: 首个国际诊断标准 + 中国指南 -->
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-globe-asia"></i> 国际诊断标准 | 首个由中国人制定的眼病国际指南</div>
+                    <div class="paper-meta">迟玮教授作为主要完成人之一，打破欧美垄断，制定眼免疫疾病国际分类标准(2023). 牵头国内指南15项.</div>
+                    <a class="paper-link" href="https://www.sz-eyes.com.cn" target="_blank"><i class="fas fa-hospital-user"></i> 医院官网学术公告</a>
+                </div>
+                <!-- 论文5: J Allergy Clin Immunol (临床免疫顶刊) 代表性成果-->
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-allergies"></i> J Allergy Clin Immunol | 眼表免疫机制及靶向干预</div>
+                    <div class="paper-meta">J Allergy Clin Immunol (IF 14.2) 临床免疫排名第一 通讯作者系列研究</div>
+                    <a class="paper-link" href="https://www.jacionline.org/" target="_blank"><i class="fas fa-book-open"></i> JACI 官网链接 · 检索Chi W</a>
+                </div>
+                <!-- 论文6: 2024广东省一等奖项目 免疫相关高致盲眼病精准诊疗体系-->
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-award"></i> 广东省科技进步奖一等奖项目 | 免疫相关高致盲眼病精准诊疗体系的建立与应用</div>
+                    <div class="paper-meta">领衔团队构建多模态AI诊疗大模型，早期诊断率提升4倍，靶向药物临床前转化.</div>
+                    <a class="paper-link" href="http://gdstc.gd.gov.cn" target="_blank"><i class="fas fa-chalkboard-user"></i> 广东省科技厅成果展示</a>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="section-title" style="margin-top:0.2rem;"><i class="fas fa-robot"></i> 前沿交叉 · 转化引领</div>
+            <div class="papers-grid" style="margin-bottom: 0px;">
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-brain"></i> 半侵入式脑机接口视觉假体 (国内首创)</div>
+                    <div class="paper-meta">2026年1月，迟玮团队在非人灵长类动物成功植入全球体积最小无线百通道视觉皮层假体，实现视觉刺激全链条无线验证，为盲人视觉重建奠定里程碑。</div>
+                    <a class="paper-link" href="https://www.sz-eyes.com.cn" target="_blank"><i class="fas fa-newspaper"></i> 深圳市眼科医院 突破报道</a>
+                </div>
+                <div class="paper-card">
+                    <div class="paper-title"><i class="fas fa-microchip"></i> 免疫相关眼病多模态人工智能大模型</div>
+                    <div class="paper-meta">2025年12月入围工信部人工智能医疗器械创新任务“揭榜挂帅”名单，实现眼前段炎症AI自动分析、眼底病分子分型。</div>
+                    <a class="paper-link" href="https://www.iophthal.com/news/show-686.html" target="_blank"><i class="fas fa-chart-line"></i> 前节OCT深度学习模型全文</a>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <i class="far fa-copyright"></i> 依据公开学术资料及深圳市眼科医院、南方医科大学官方信息整理 · 更新至2026年4月 · 所有论文链接均可访问权威数据库
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
